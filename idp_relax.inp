@@ -1,0 +1,118 @@
+* Relax IDP-LZerD output
+*
+bomlev 0
+set charmmsrcdir {charmm_dir}
+set dir {working_dir}
+set nam {filename}
+set rch {receptor_chain}
+set lch {ligand_chain}
+
+read rtf card name @charmmsrcdir/test/data/top_all27_prot_na.rtf
+read para card name @charmmsrcdir/test/data/par_all27_prot_na.prm
+
+stream @dir/@nam.seq  ! Sequence file
+write psf card name @dir/@nam.psf
+* @nam psf
+*
+read coor card name @dir/@nam.cor ! Coordinate file
+
+define hydr sele type H* end
+define miss sele (.not. init) .and. (.not. type H*) end
+set misn ?nsel
+if @misn .gt. 0 then
+ic para
+ic buil
+coor init sele type H* end
+endif
+hbuild
+
+!Set parameters
+set ctnb 14
+set ctof 12
+set cton 10
+set diele 1.0
+set gamma 0.015
+
+NBOND atom cdiel shift vatom vdistance vswitch -
+ cutnb @ctnb ctofnb @ctof ctonnb @cton eps @diele wmin 1.5
+
+scalar wmain = radius
+
+! XXX documentation of tcil @ctof tcic @ctnb is INCORRECT
+facts tcps 22 teps @diele tkps 8.0 gamma @gamma -
+ conc 0.0 temp 298 tcil @ctnb tcic @ctof tavw
+
+define heavy sele (.not. type H*) end
+define backbone sele (type C .or. type N .or. type CA .or. type O) end
+define calpha sele type CA end
+define rec sele (SEGI @rch) end
+define lig sele (SEGI @lch) end
+
+!Set parameters
+set rnd1 893112
+set rnd2 766989
+set rnd3 542477
+set rnd4 934490
+
+update
+cons fix sele rec end
+cons harm force 50.0 sele lig end
+mini sd nstep 100
+mini abnr nstep 100
+
+!cons fix sele none end
+cons harm force 40.0 sele lig end
+mini abnr nstep 100
+
+cons harm force 30.0 sele lig end
+mini abnr nstep 100
+
+cons harm force 20.0 sele lig end
+mini abnr nstep 100
+
+cons harm force 10.0 sele lig end
+mini abnr nstep 100
+
+cons harm force 0.0 sele lig end
+SHAKE bonh para
+cons harm force 10.0 sele lig .and. backbone end
+mini abnr nstep 100
+
+cons harm force 5.0 sele lig .and. backbone end
+mini abnr nstep 100
+
+cons harm force 1.0 sele lig .and. backbone end
+mini abnr nstep 100
+
+cons harm force 0.0 sele lig .and. backbone end
+mini abnr nstep 5000
+
+write coor card name @dir/@nam_min.cor
+* @nam add hydrogen and minimize
+*
+
+cons harm force 10.0 sele calpha end
+SHAKE bonh para
+
+open write card unit 41 name @dir/@nam.rst
+open write file unit 42 name @dir/@nam.trj
+
+set nstp 20000
+set tstp 0.002
+set tempi 100
+set tempf 200
+dyna leap verlet start nstep @nstp timestep @tstp -
+    inbfrq 0 ihbfrq 0 iseed @rnd1 @rnd2 @rnd3 @rnd4 echeck 500.0 -
+    ieqfrq 1000 ichecw 1 twindh +5.0 twindl -5.0 iasors 1 iasvel 1 -
+    firstt @tempi finalt @tempf ihtfrq 1000 teminc 5.0 -
+    iunwri 41 iuncrd 42 -
+    nsavc 1000 nsavv 1000 isvfrq 5000
+
+close unit 41
+close unit 42
+write coor card name @dir/@nam_relax.cor
+* @nam relax
+*
+
+stop
+
