@@ -125,7 +125,7 @@ class MakePdb(object):
             new_start = windowdf[windowdf['position'] == last_pos]['res_start'].tolist()[0]
             assert new_start % 6 == 1
             last_pos_dir = os.path.dirname(pos_file_dict[last_pos][0])
-            new_dir = last_pos_dir.replace("{0:.0f}".format(last_pos), "{0:.0f}".format(new_start))
+            new_dir = os.path.join(os.path.dirname(os.path.normpath(last_pos_dir)), "{0:.0f}".format(new_start))
             logging.debug("Changing position %s to start at %s", last_pos, new_start)
             shared.mkdir_p(new_dir)
             # ADD NEW DIR TO DICT

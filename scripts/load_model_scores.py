@@ -568,9 +568,9 @@ class LoadModelScores(object):
     @classmethod
     def parse_args(cls, module_args=None):
         a = argparse.ArgumentParser()
-        a.add_argument("-w", "--working_dir", metavar="DIR",
+        a.add_argument("-d", "--working_dir", metavar="DIR",
                        help="Location of files.")
-        a.add_argument("-d", "--complexdb",
+        a.add_argument("-b", "--complexdb",
                        help="Path to complex database")
         a.add_argument("-p", "--complexname",
                        help="PDB ID (name of subdirectory)")

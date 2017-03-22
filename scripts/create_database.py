@@ -39,9 +39,9 @@ class CreateDatabaseError(RuntimeError):
         super(CreateDatabaseError, self).__init__(message)
 
 
-def main(wd, pdbid, r_ch, l_ch, data):
+def main(directory, pdbid, r_ch, l_ch, input):
 
-    wd = os.path.abspath(wd)
+    wd = os.path.abspath(directory)
     subdir = os.path.join(wd, pdbid)
     complexid = "{0}{1}{2}".format(pdbid, r_ch, l_ch)
     complexdb = os.path.join(wd, "scores_{0}.db".format(complexid))
@@ -50,7 +50,7 @@ def main(wd, pdbid, r_ch, l_ch, data):
         return
 
     # Initialize window data
-    window_data = pd.read_csv(data)
+    window_data = pd.read_csv(input)
     windows = list()
     fragments = list()
     # Windows are in 2nd-level subdirectories
@@ -91,7 +91,7 @@ def main(wd, pdbid, r_ch, l_ch, data):
 
 def parse_args(module_args=None):
     a = argparse.ArgumentParser()
-    a.add_argument("-w", "--wd",
+    a.add_argument("-d", "--directory",
                    help="Working directory")
     a.add_argument("-p", "--pdbid",
                    help="PDB ID (name of subdirectory)")
@@ -99,7 +99,7 @@ def parse_args(module_args=None):
                    help="Receptor chain")
     a.add_argument("-l", "--l_ch",
                    help="Ligand chain")
-    a.add_argument("-d", "--data",
+    a.add_argument("-i", "--input",
                    help="Window data in CSV format")
 
     args = a.parse_args(module_args)

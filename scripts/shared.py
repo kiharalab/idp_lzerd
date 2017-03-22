@@ -122,6 +122,18 @@ def create_update_statement(tablename, columns, where):
     return update_stmt
 
 #### FILE SYSTEM FUNCTIONS ####
+class CHDIR(object):
+    def __init__(self, dirname):
+        self.dirname = dirname
+
+    def __enter__(self):
+        self.old_dir = os.getcwd()
+        os.chdir(self.dirname)
+
+    def __exit__(self, exception_type, exception_value, traceback):
+        os.chdir(self.old_dir)
+
+
 def missing(*files):
     "Check whether files are missing or empty"
     return any(not os.path.isfile(f) or not os.path.getsize(f)
@@ -283,7 +295,14 @@ def load_config():
                 if line[0] != "[" or line[-1] != "]":
                     print "Could not interpret config line %s" % line
 
-    if 'lzerd_path' not in config:
-        raise IDPError("'{0}' did not contain required key 'lzerd_path'".format(path_file))
-    else:
+    required_keys = ('lzerd_path', 'rosetta_path', 'nr_path', 'blastpgp_exe')
+
+    #if 'lzerd_path' not in config:
+        #raise IDPError("'{0}' did not contain required key 'lzerd_path'".format(path_file))
+    errors = 0
+    for key in required_keys:
+        if key not in config:
+            errors += 1
+            raise IDPError("'{0}' did not contain required key '{1}'".format(path_file, key))
+    if not errors:
         return config
