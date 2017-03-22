@@ -1,0 +1,37 @@
+# Input databases
+#-in::path::database		/apps/rosetta/current/rosetta_database
+-in::path::database		{rosetta_path}/main/database
+#-in::file::vall              	/apps/rosetta/current/rosetta_tools/fragment_tools/vall.apr24.2008.extended.gz
+-in::file::vall              	{rosetta_path}/tools/fragment_tools/vall.apr24.2008.extended.gz
+#-in::file::native   input_files/{pdbid}.pdb
+{native_line}
+
+# Query-related input files
+# Sequence profile
+-in::file::checkpoint 		input_files/{pdbid}.checkpoint
+-in::file::fasta			input_files/{pdbid}.fasta
+-frags::ss_pred			{psipred_path} psipred {porter_path} porter {jpred_path} jpred {sspro_path} sspro
+
+# the name root for the output fragment files
+-out::file::frag_prefix		output_files/{pdbid}
+
+# Show score components for each selected fragment
+-frags::describe_fragments 	output_files/{pdbid}.fsc
+
+# Weights file
+-frags::scoring::config		input_files/quota-protocol{protocol_type}.wghts
+
+# we need nine-mers and three-mers
+-frags::frag_sizes 		9
+-frags::write_ca_coordinates
+
+# Select {nfrag} fragments from 1000 candidates. We need more candidates than fragments
+# to fill quota pools. 
+-frags::n_candidates		1000
+-frags::n_frags			{nfrag}
+
+# Quota.def file defines the shares between different quota pools. The total should be 1.0
+-frags::picking::quota_config_file 	input_files/quota.def
+
+# Get rid of homologues fragments
+-frags::denied_pdb 		input_files/{pdbid}.homolog_vall

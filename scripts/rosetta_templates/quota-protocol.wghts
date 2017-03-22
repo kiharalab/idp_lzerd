@@ -1,0 +1,13 @@
+# score name          priority	wght   min_allowed  extras 
+SecondarySimilarity	350	0.5	-	psipred
+SecondarySimilarity	250	0.5	-   porter	
+SecondarySimilarity	250	0.5	-   jpred
+SecondarySimilarity	250	0.5	-   sspro
+RamaScore		150	1.0	-	psipred
+RamaScore		150	1.0	-	porter
+RamaScore		150	1.0	-	jpred
+RamaScore		150	1.0	-   sspro	
+# Sequence profile
+ProfileScoreL1      	200	1.0     -
+#PhiPsiSquareWell	100	0.0	-
+#FragmentCrmsd        	30 	0.0  	-
