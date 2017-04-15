@@ -189,13 +189,13 @@ class ParseSs(object):
     def commandline(cls, module_args=None):
         desc = """Parser for secondary structure prediction formats"""
         a = argparse.ArgumentParser(description=desc)
-        a.add_argument("--generic",
+        a.add_argument("--generic", metavar="FILE",
                        help="Generic format (first line: amino acid sequence, second line: 3-class SS pred)")
-        a.add_argument("--porter",
+        a.add_argument("--porter", metavar="FILE",
                        help="PORTER email output")
-        a.add_argument("--jpred",
+        a.add_argument("--jpred", metavar="FILE",
                        help="Jpred .concise output")
-        a.add_argument("--sspro",
+        a.add_argument("--sspro", metavar="FILE",
                        help="SSpro email output")
 
         args = a.parse_args(module_args)

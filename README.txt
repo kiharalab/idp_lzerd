@@ -21,6 +21,7 @@ Biopython
 
 Binary dependencies
 -------------------
+blastpgp and nr database (https://blast.ncbi.nlm.nih.gov/Blast.cgi)
 LZerD (http://kiharalab.org/proteindocking/lzerd.php)
 Rosetta (https://www.rosettacommons.org)
 Pulchra (http://cssb.biology.gatech.edu/PULCHRA)
@@ -31,19 +32,20 @@ One side-chain modeling software such as:
 * RASP (http://jianglab.ibp.ac.cn/lims/rasp/rasp)
 GOAP (http://cssb.biology.gatech.edu/GOAP/index.html)
 ITScorePro (http://zoulab.dalton.missouri.edu/resources.html)
-CHARMM (https://www.charmm.org)
+charmm (https://www.charmm.org)
 
 Getting started
 ===============
 
+0. Edit PATHS.ini to specify path to LZerD, blastpgp, nr, and Rosetta
+
 Test protein
 ------------
-1. Edit PATHS.ini to specify path to LZerD
-2. Edit 'test/test_decoys.sh' to specify path to IDP-LZerD
-3. Run test (NOTE: creates ~250 GB of files): `cd test && ./test_decoys.sh`
-4. Non-refined paths will be output in 'test/4ah2ac3'
-5. Follow standard procedures to prepare PDB files for CHARMM
-6. Edit CHARMM input file 'idp_relax.inp' to run CHARMM
+1. Edit 'test/test_decoys.sh' to specify path to IDP-LZerD
+2. Run test (NOTE: creates ~250 GB of files): `cd test && ./test_decoys.sh`
+3. Non-refined paths will be output in 'test/4ah2ac3'
+4. Follow standard procedures to prepare PDB files for CHARMM
+5. Edit CHARMM input file 'idp_relax.inp' to run CHARMM
 
 Running a new protein
 ---------------------
