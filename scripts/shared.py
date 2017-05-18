@@ -280,7 +280,7 @@ def load_config():
     # Parse paths
     path_file = os.path.join(ROOTDIR, "PATHS.ini")
     if not os.path.isfile(path_file):
-        raise IDPError("Could not open PATHS.ini")
+        raise IDPError("Could not open %s" % path_file)
     config = dict()
     with open(path_file) as ih:
         for line in ih:
