@@ -22,7 +22,6 @@ import logging
 import os
 import shutil
 import subprocess
-import sys
 
 script_dir = os.path.abspath(os.path.dirname(inspect.getfile(inspect.currentframe())))
 
