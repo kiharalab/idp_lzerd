@@ -6,6 +6,11 @@ intrinsically disordered protein (IDP) binds to an ordered protein.
 The inputs are the sequence of a disordered protein and the structure of an
 ordered protein.
 
+License: GPL v3 for academic use.
+(For commercial use, please contact us for different licensing)
+
+Contact: Daisuke Kihara (dkihara@purdue.edu)
+
 Installation
 ============
 
