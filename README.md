@@ -6,10 +6,14 @@ intrinsically disordered protein (IDP) binds to an ordered protein.
 The inputs are the sequence of a disordered protein and the structure of an
 ordered protein.
 
+Copyright (C) 2016-2017 Lenna X. Peterson, Daisuke Kihara, and Purdue University.
+
 License: GPL v3 for academic use.
 (For commercial use, please contact us for different licensing)
 
 Contact: Daisuke Kihara (dkihara@purdue.edu)
+
+Reference: Lenna Peterson, A Roy, C Christoffer, G Terashi, and D Kihara. (2017) Modeling disordered protein interactions from biophysical principles. _PLoS Computational Biology_ 13: e1005485. doi: [10.1371/journal.pcbi.1005485](http://dx.doi.org/10.1371/journal.pcbi.1005485)
 
 Installation
 ============
@@ -18,26 +22,26 @@ To run the test, LZerD and all Python dependencies are required.
 
 Python dependencies
 -------------------
-apsw
-numpy
-scipy
-pandas
-Biopython
+- apsw
+- numpy
+- scipy
+- pandas
+- Biopython
 
 Binary dependencies
 -------------------
-blastpgp and nr database (https://blast.ncbi.nlm.nih.gov/Blast.cgi)
-LZerD (http://kiharalab.org/proteindocking/lzerd.php)
-Rosetta (https://www.rosettacommons.org)
-Pulchra (http://cssb.biology.gatech.edu/PULCHRA)
-One side-chain modeling software such as:
-* SCCOMP (http://www.sheba-cancer.org.il/cgi-bin/sccomp/sccomp1.cgi)
-* Scwrl4 (http://dunbrack.fccc.edu/scwrl4/)
-* Oscar-star (http://sysimm.ifrec.osaka-u.ac.jp/OSCAR)
-* RASP (http://jianglab.ibp.ac.cn/lims/rasp/rasp)
-GOAP (http://cssb.biology.gatech.edu/GOAP/index.html)
-ITScorePro (http://zoulab.dalton.missouri.edu/resources.html)
-charmm (https://www.charmm.org)
+- blastpgp and nr database (https://blast.ncbi.nlm.nih.gov/Blast.cgi)
+- LZerD (http://kiharalab.org/proteindocking/lzerd.php)
+- Rosetta (https://www.rosettacommons.org)
+- Pulchra (http://cssb.biology.gatech.edu/PULCHRA)
+- One side-chain modeling software such as:
+    * SCCOMP (http://www.sheba-cancer.org.il/cgi-bin/sccomp/sccomp1.cgi)
+    * Scwrl4 (http://dunbrack.fccc.edu/scwrl4/)
+    * Oscar-star (http://sysimm.ifrec.osaka-u.ac.jp/OSCAR)
+    * RASP (http://jianglab.ibp.ac.cn/lims/rasp/rasp)
+- GOAP (http://cssb.biology.gatech.edu/GOAP/index.html)
+- ITScorePro (http://zoulab.dalton.missouri.edu/resources.html)
+- charmm (https://www.charmm.org)
 
 Getting started
 ===============
