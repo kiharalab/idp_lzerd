@@ -49,6 +49,7 @@ Getting started
 ===============
 
 0. Edit PATHS.ini to specify path to LZerD, blastpgp, nr, and Rosetta
+    * A common mistake is to skip installation of blastpgp and/or the nr database. If Rosetta attempts to download software and/or reports any errors mentioning "blast" or "nr", make sure the contents of PATHS.ini agree with where you have installed the dependencies.
 
 Test protein
 ------------
